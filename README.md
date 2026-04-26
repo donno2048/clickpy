@@ -65,7 +65,7 @@ The method expects the same (optional) keyword arguments as `clicks_here` but al
 
 Example usage:
 
-```pt
+```py
 from clickpy import clicks_at, SHIFT, ALT
 # same as the clicks_here example but at (0,0)
 clicks_at((0,0), ms_delay=10, total_clicks=1_000_000, key_stop=ord('0'), key_start=ord('0'), stop_modifier=SHIFT|ALT)
