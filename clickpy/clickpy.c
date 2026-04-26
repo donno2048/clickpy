@@ -74,7 +74,6 @@ static PyObject *clicks_py(PyObject *self, PyObject *args, PyObject *kwargs) {
     Py_RETURN_NONE;
 }
 static PyObject *clicks_at_py(PyObject *self, PyObject *args, PyObject *kwargs) {
-    // ms_delay/0, key_stop/None, key_start/None, total_clicks/0
     static char* keywords[] = {"position", "ms_delay", "key_stop", "key_start", "total_clicks", "stop_modifier", "start_modifier", NULL};
     unsigned int msDelay = 0, keyStop = 0, keyStart = 0, stopModifier = 0, startModifier = 0;
     unsigned long total = 0;
