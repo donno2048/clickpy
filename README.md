@@ -25,6 +25,15 @@ pip3 install git+https://github.com/donno2048/clickpy
 
 Here's the method listing for the package.
 
+ - `get_cursor_pos`: Can be used to determine the position to feed `click_at` or `clicks_at`.
+
+Example usage:
+
+```py
+from clickpy import get_cursor_pos
+get_cursor_pos()
+```
+
  - `click_here`: The method will create a click at the current location
 
 Example usage:
@@ -66,7 +75,7 @@ The method expects the same (optional) keyword arguments as `clicks_here` but al
 Example usage:
 
 ```py
-from clickpy import clicks_at, SHIFT, ALT
-# same as the clicks_here example but at (0,0)
-clicks_at((0,0), ms_delay=10, total_clicks=1_000_000, key_stop=ord('0'), key_start=ord('0'), stop_modifier=SHIFT|ALT)
+from clickpy import clicks_at, get_cursor_pos, SHIFT, ALT
+# same as the clicks_here example but at the initial position of the cursor
+clicks_at(get_cursor_pos(), ms_delay=10, total_clicks=1_000_000, key_stop=ord('0'), key_start=ord('0'), stop_modifier=SHIFT|ALT)
 ```

@@ -21,14 +21,16 @@ void click(int atPos, int useStartKey, int useStopKey, DWORD msDelay, LONG total
     for (unsigned long i = 0; !total || (i != total); i++) {
         INPUT input = {0};
         input.type = INPUT_MOUSE;
-        input.mi.dx = atPos ? x : 0;
-        input.mi.dy = atPos ? y : 0;
+        input.mi.dx = atPos * MulDiv(x, 0xFFFF, GetSystemMetrics(SM_CXSCREEN));
+        input.mi.dy = atPos * MulDiv(y, 0xFFFF, GetSystemMetrics(SM_CYSCREEN));
         input.mi.mouseData = 0;
         input.mi.time = 0;
         input.mi.dwExtraInfo = 0;
-        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTDOWN;
+        input.mi.dwFlags = (atPos * (MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE)) | MOUSEEVENTF_LEFTDOWN;
         SendInput(1, &input,  sizeof(INPUT));
-        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTUP;
+        input.mi.dx = 0;
+        input.mi.dy = 0;
+        input.mi.dwFlags = MOUSEEVENTF_LEFTUP;
         SendInput(1, &input,  sizeof(INPUT));
         Sleep(msDelay);
         if (useStopKey && PeekMessageA(&msg, NULL, WM_HOTKEY, WM_HOTKEY, PM_REMOVE))
@@ -84,7 +86,16 @@ static PyObject *clicks_at_py(PyObject *self, PyObject *args, PyObject *kwargs) 
     click(1, keyStart, keyStop, msDelay, total, keyStop, keyStart, stopModifier, startModifier, PyLong_AsLong(PyTuple_GetItem(position, 0)), PyLong_AsLong(PyTuple_GetItem(position, 1)));
     Py_RETURN_NONE;
 }
+static PyObject *get_pos(PyObject *self, PyObject *_) {
+    POINT point;
+    GetCursorPos(&point);
+    PyObject *py_point = PyTuple_New(2);
+    PyTuple_SET_ITEM(py_point, 0, PyLong_FromLong(point.x));
+    PyTuple_SET_ITEM(py_point, 1, PyLong_FromLong(point.y));
+    return py_point;
+}
 static PyMethodDef clickpy_methods[] = {
+    {"get_cursor_pos", get_pos, METH_NOARGS, "get the current position of the cursor"},
     {"click_here", click_py, METH_NOARGS, "click here"},
     {"click_at", click_at_py, METH_O, "click at a specific location"},
     {"clicks_here", (PyCFunction)clicks_py, METH_VARARGS | METH_KEYWORDS, "multiple clicks at the current location"},
