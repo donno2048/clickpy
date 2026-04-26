@@ -26,9 +26,9 @@ void click(int atPos, int useStartKey, int useStopKey, DWORD msDelay, LONG total
         input.mi.mouseData = 0;
         input.mi.time = 0;
         input.mi.dwExtraInfo = 0;
-        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTDOWN;
+        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTDOWN;
         SendInput(1, &input,  sizeof(INPUT));
-        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTUP;
+        input.mi.dwFlags = (atPos ? (MOUSEEVENTF_MOVE | MOUSEEVENTF_ABSOLUTE | MOUSEEVENTF_VIRTUALDESK) : 0) | MOUSEEVENTF_LEFTUP;
         SendInput(1, &input,  sizeof(INPUT));
         Sleep(msDelay);
         if (useStopKey && PeekMessageA(&msg, NULL, WM_HOTKEY, WM_HOTKEY, PM_REMOVE))
@@ -41,7 +41,7 @@ static int validCoords(PyObject *args) {
         PyErr_SetString(PyExc_TypeError, "Argument must be a tuple.");
         return 0;
     }
-    if (!PyTuple_Size(args) != 2) {
+    if (PyTuple_Size(args) != 2) {
         PyErr_SetString(PyExc_TypeError, "Tuple must have 2 elements.");
         return 0;
     }
