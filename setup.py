@@ -1,23 +1,24 @@
-from setuptools import setup, find_packages
+from setuptools import setup, Extension
+from os import name
 setup(
-    name='nothingness',
+    name='clickpy',
     version='1.0.0',
     license='MIT',
     author='Elisha Hollander',
     author_email='just4now666666@gmail.com',
-    description="This is nothing, just a template for PyPI packages",
+    description="A library able to control mouse for auto-clicking",
     long_description=open('README.md').read(),
     long_description_content_type="text/markdown",
-    url='https://github.com/donno2048/nothingness',
+    url='https://github.com/donno2048/clickpy',
     project_urls={
-        'Documentation': 'https://github.com/donno2048/nothingness#readme',
-        'Bug Reports': 'https://github.com/donno2048/nothingness/issues',
-        'Source Code': 'https://github.com/donno2048/nothingness',
+        'Documentation': 'https://github.com/donno2048/clickpy#readme',
+        'Bug Reports': 'https://github.com/donno2048/clickpy/issues',
+        'Source Code': 'https://github.com/donno2048/clickpy',
     },
-    python_requires='>=3.0',
-    packages=find_packages(),
-    install_requires=[],
+    ext_modules=[Extension('clickpy', ['clickpy\\clickpy.c'], libraries = ["user32"])] if name == 'nt' else None,
+    classifiers=["Environment :: Win32 (MS Windows)"],
+    zip_safe = False,
+    platforms='win32',
     include_package_data=True,
-    classifiers=['Programming Language :: Python :: 3'],
-    entry_points={ 'console_scripts': [ 'nothingness=nothingness.__main__:main' ] }
+    py_modules=["clickpy"]
 )
