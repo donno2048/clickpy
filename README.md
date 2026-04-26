@@ -45,12 +45,12 @@ click_at((0,0))
 
 - `clicks_here`: The method will create a certain amount of click at the current location
 The method has a number of optional keyword arguments:
- * `ms_delay` - the delay in milliseconds between the clicks [default: at fast as the OS allows]
- * `total_clicks` - the total clicks to be sent [default: infinitely many]
- * `key_stop` - a virtual key code that when entered in the keyboard the clicks will stop at once - e.g. `ord('a'.upper())` to stop on `a` key press [default: stop only after `total_clicks` clicks]
- * `key_start` - similar to `key_stop` but for starting the clicks [default: start immediately]
- * `stop_modifier` - the modifier (e.g. `ALT`, `CONTROL`, `SHIFT` and `WIN`) for `key_stop`
- * `start_modifier` - the modifier for `key_start`
+   * `ms_delay` - the delay in milliseconds between the clicks [default: at fast as the OS allows]
+   * `total_clicks` - the total clicks to be sent [default: infinitely many]
+   * `key_stop` - a virtual key code that when entered in the keyboard the clicks will stop at once - e.g. `ord('a'.upper())` to stop on `a` key press [default: stop only after `total_clicks` clicks]
+   * `key_start` - similar to `key_stop` but for starting the clicks [default: start immediately]
+   * `stop_modifier` - the modifier (e.g. `ALT`, `CONTROL`, `SHIFT` and `WIN`) for `key_stop`
+   * `start_modifier` - the modifier for `key_start`
 
 Example usage:
 
