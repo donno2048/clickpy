@@ -52,7 +52,7 @@ static int validCoords(PyObject *args) {
         return 0;
     }
     if (!PyLong_Check(PyTuple_GetItem(args, 1))) {
-        PyErr_SetString(PyExc_TypeError, "position's element must be a an int.");
+        PyErr_SetString(PyExc_TypeError, "position's second element must be an int.");
         return 0;
     }
     return 1;
