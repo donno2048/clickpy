@@ -25,7 +25,7 @@ pip3 install git+https://github.com/donno2048/clickpy
 
 Here's the method listing for the package.
 
- - `get_cursor_pos`: Can be used to determine the position to feed `click_at` or `clicks_at`.
+ - `get_cursor_pos`: Get Current cursor position. Can be used to determine the position to feed `click_at` or `clicks_at`.
 
 Example usage:
 
@@ -34,7 +34,7 @@ from clickpy import get_cursor_pos
 get_cursor_pos()
 ```
 
- - `click_here`: The method will create a click at the current location
+ - `click_here`: The method will create a click at the current cursor location
 
 Example usage:
 
@@ -52,11 +52,11 @@ from clickpy import click_at
 click_at((0,0))
 ```
 
-- `clicks_here`: The method will create a certain amount of click at the current location
+- `clicks_here`: The method will create a certain amount of clicks at the current cursor location.
 The method has a number of optional keyword arguments:
    * `ms_delay` - the delay in milliseconds between the clicks [default: at fast as the OS allows]
    * `total_clicks` - the total clicks to be sent [default: infinitely many]
-   * `key_stop` - a virtual key code that when entered in the keyboard the clicks will stop at once - e.g. `ord('a'.upper())` to stop on `a` key press [default: stop only after `total_clicks` clicks]
+   * `key_stop` - a virtual key code that when pressed the clicks will stop at once (e.g. `ord('a'.upper())` to stop on an `a` key press) [default: stop only after `total_clicks` clicks]
    * `key_start` - similar to `key_stop` but for starting the clicks [default: start immediately]
    * `stop_modifier` - the modifier (e.g. `ALT`, `CONTROL`, `SHIFT` and `WIN`) for `key_stop`
    * `start_modifier` - the modifier for `key_start`
@@ -69,7 +69,7 @@ from clickpy import clicks_here, SHIFT, ALT
 clicks_here(ms_delay=10, total_clicks=1_000_000, key_stop=ord('0'), key_start=ord('0'), stop_modifier=SHIFT|ALT)
 ```
 
- - `clicks_at`: The method will create a certain amount of clicks at the specified location
+ - `clicks_at`: The method will create a certain amount of clicks at the specified location.
 The method expects the same (optional) keyword arguments as `clicks_here` but also a (x,y) coordinates tuple which can be provided as a positional argument or as the `position` keyword
 
 Example usage:
