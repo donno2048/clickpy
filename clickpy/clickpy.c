@@ -40,19 +40,19 @@ void click(int atPos, int useStartKey, int useStopKey, DWORD msDelay, LONG total
 }
 static int validCoords(PyObject *args) {
     if (!PyTuple_Check(args)) {
-        PyErr_SetString(PyExc_TypeError, "Argument must be a tuple.");
+        PyErr_SetString(PyExc_TypeError, "position must be a tuple.");
         return 0;
     }
     if (PyTuple_Size(args) != 2) {
-        PyErr_SetString(PyExc_TypeError, "Tuple must have 2 elements.");
+        PyErr_SetString(PyExc_TypeError, "position tuple must have 2 elements.");
         return 0;
     }
     if (!PyLong_Check(PyTuple_GetItem(args, 0))) {
-        PyErr_SetString(PyExc_TypeError, "First element must be a long.");
+        PyErr_SetString(PyExc_TypeError, "position's first element must be an int.");
         return 0;
     }
     if (!PyLong_Check(PyTuple_GetItem(args, 1))) {
-        PyErr_SetString(PyExc_TypeError, "Second element must be a long.");
+        PyErr_SetString(PyExc_TypeError, "position's element must be a an int.");
         return 0;
     }
     return 1;
